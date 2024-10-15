@@ -164,3 +164,110 @@ function isValidPhone(phone) {
     // Basic phone number validation regex (adjust as needed)
     return /^\+?[\d\s-]{10,}$/.test(phone);
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('teacher-signup-form');
+    if (!form) return; // Exit if we're not on the teacher signup page
+
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const step3 = document.getElementById('step3');
+
+    const emailInput = document.getElementById('email');
+    const verifyEmailButton = document.getElementById('verify-email');
+    const verificationCodeInput = document.getElementById('verification-code');
+    const submitVerificationButton = document.getElementById('submit-verification');
+
+    // Populate birth year options
+    const birthYearSelect = document.getElementById('birth-year');
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear - 100; year <= currentYear - 18; year++) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        birthYearSelect.appendChild(option);
+    }
+
+    verifyEmailButton.addEventListener('click', function() {
+        const email = emailInput.value;
+        if (isValidEmail(email)) {
+            // Here you would typically send a verification code to the email
+            showSuccess(step1, 'Verification code sent to your email');
+            step2.style.display = 'block';
+            verifyEmailButton.textContent = 'Resend Code';
+        } else {
+            showError(step1, 'Please enter a valid email address');
+        }
+    });
+
+    submitVerificationButton.addEventListener('click', function() {
+        const verificationCode = verificationCodeInput.value;
+        if (verificationCode) {
+            // Here you would typically verify the code with your backend
+            showSuccess(step2, 'Email verified successfully');
+            step3.style.display = 'block';
+        } else {
+            showError(step2, 'Please enter the verification code');
+        }
+    });
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateForm()) {
+            // Here you would typically submit the form data to your backend
+            alert('Form submitted successfully!');
+        }
+    });
+
+    function isValidEmail(email) {
+        // Basic email validation
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    function validateForm() {
+        let isValid = true;
+        const fieldsToValidate = ['name', 'phone', 'password', 'confirm-password', 'gender', 'birth-year'];
+        fieldsToValidate.forEach(field => {
+            const input = document.getElementById(field);
+            if (!input.value) {
+                showError(input.parentElement, `Please enter your ${field.replace('-', ' ')}`);
+                isValid = false;
+            }
+        });
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+        if (password !== confirmPassword) {
+            showError(document.getElementById('confirm-password-group'), 'Passwords do not match');
+            isValid = false;
+        }
+
+        if (!document.getElementById('terms').checked) {
+            showError(document.getElementById('terms-group'), 'Please agree to the terms and conditions');
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    function showError(container, message) {
+        const errorElement = container.querySelector('.error-message');
+        errorElement.textContent = message;
+        errorElement.style.color = 'red';
+    }
+
+    function showSuccess(container, message) {
+        const errorElement = container.querySelector('.error-message');
+        errorElement.textContent = message;
+        errorElement.style.color = 'green';
+    }
+
+    // Prevent button text from disappearing
+    emailInput.addEventListener('input', function() {
+        verifyEmailButton.textContent = verifyEmailButton.textContent || 'Verify';
+    });
+
+    verificationCodeInput.addEventListener('input', function() {
+        submitVerificationButton.textContent = submitVerificationButton.textContent || 'Submit';
+    });
+});
