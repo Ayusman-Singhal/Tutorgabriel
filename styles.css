@@ -149,17 +149,13 @@ nav .nav-links a:hover {
 }
 
 /* Sign-Up Forms */
-.signup-section {
-    padding: 3rem;
-    text-align: center;
-}
 
 .signup-section form {
     display:flex;
     flex-direction:column;
     align-items: center;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
+    background: rgba(40, 40, 40, 0.8);
+    padding: 0.5rem;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
@@ -225,28 +221,11 @@ nav .nav-links a:hover {
     color: #ff4081;
 }
 
-.input-group {
-    margin-bottom: 1.5rem;
-    text-align: left;
-    width: 100%;
-    max-width: 400px;
-}
-
 .input-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
     color: #fff;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid #ff4081;
-    border-radius: 5px;
-    background: #1e1e1e;
-    color: #fff;
-    transition: border-color 0.3s ease;
 }
 
 .input-group input:focus {
@@ -511,4 +490,76 @@ body.light-mode footer {
 /* Light mode adjustments */
 body.light-mode .hamburger div {
     background-color: #333;
+}
+
+/* Sign up teacher form */
+
+.signup-section {
+    max-width: 500px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.step {
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+#verify-email,
+#submit-verification,
+#signup-button {
+    background-color: #ff4081;
+    color: white;
+    border: none;
+    align-self: start;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#verify-email:hover,
+#submit-verification:hover,
+#signup-button:hover {
+    background-color: #e91e63;
+}
+
+.error-message {
+    display: flex;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+#email-group,
+#verification-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#email-group input,
+#verification-group input {
+    flex-grow: 1;
+}
+
+#verify-email,
+#submit-verification {
+    white-space: nowrap;
 }
