@@ -266,7 +266,6 @@ document.addEventListener('DOMContentLoaded', function() {
     emailInput.addEventListener('input', function() {
         verifyEmailButton.textContent = verifyEmailButton.textContent || 'Verify';
     });
-
     verificationCodeInput.addEventListener('input', function() {
         submitVerificationButton.textContent = submitVerificationButton.textContent || 'Submit';
     });
