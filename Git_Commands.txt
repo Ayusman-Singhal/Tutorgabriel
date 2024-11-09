@@ -1,8 +1,14 @@
+# Configure Git in you repository:
+cd (path_to_project)
 git init
+# Configure git with your profile
 git config --global user.email "email-id"
 git config --global user.name "name"
+# Update files from local to git
 git add .
 git commit -m "first commit"
 git branch -M main
 git remote add origin <github repo link>
 git push -u origin main
+# Get Changes from Github to Local repo:
+git pull
